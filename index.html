@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuMind | AI Multimodal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS is handled by Vite via main.js import -->
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>DocuMind</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active" data-section="upload">Home</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="devhack-logo">
+                    <span class="text-logo">DevHack</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-container">
+        <!-- Section 1: Upload (Initial State) -->
+        <section id="section-upload" class="app-section active">
+            <div class="hero-text">
+                <h1>Upload & Process Documents</h1>
+                <p>Drag and drop your PDF files here, or click to select files from your computer. Maximum file size:
+                    20MB.</p>
+            </div>
+            <div class="upload-card" id="drop-zone">
+                <div class="upload-content">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Drag and drop files here</h3>
+                    <p>Or click to browse</p>
+                    <button class="primary-btn" id="select-files-btn">Select Files</button>
+                    <input type="file" id="file-input" hidden accept=".pdf">
+                </div>
+            </div>
+            <div class="progress-container hidden" id="upload-progress">
+                <div class="progress-header">
+                    <span>Processing Document...</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-status">
+                    <p id="status-text">Initializing...</p>
+                </div>
+            </div>
+
+            <div id="post-upload-actions" class="quick-actions-container hidden">
+                <h3>Document Ready! What's next?</h3>
+                <div class="actions-grid">
+                    <button class="action-card" data-goto="dashboard">
+                        <div class="action-icon">📄</div>
+                        <span>Executive Summary</span>
+                    </button>
+                    <button class="action-card" data-goto="infographic">
+                        <div class="action-icon">📊</div>
+                        <span>Infographic Visual</span>
+                    </button>
+                    <button class="action-card" data-goto="voice">
+                        <div class="action-icon">🎙️</div>
+                        <span>Talk to Document</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Document Analysis & Summary -->
+        <section id="section-dashboard" class="app-section">
+            <div class="analysis-layout">
+                <div class="pdf-viewer-container">
+                    <div class="viewer-header">
+                        <h2>Document Preview</h2>
+                    </div>
+                    <div class="pdf-frame-wrapper">
+                        <iframe id="pdf-frame" src="about:blank" type="application/pdf" width="100%"
+                            height="100%"></iframe>
+                        <div id="pdf-no-preview" class="pdf-placeholder">
+                            <div class="placeholder-content">
+                                <span>📄</span>
+                                <p>Select a document to begin analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary-panel">
+                    <div class="panel-header">
+                        <h3>Executive Summary</h3>
+                        <p class="panel-subtitle">Key insights extracted by Gemini</p>
+                    </div>
+                    <div id="summary-content" class="markdown-body">
+                        <!-- Content will be rendered here -->
+                        <div class="skeleton-loader">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line short"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="next-btn" data-next="infographic">Generate Infographic ➔</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Infographic Visualization -->
+        <section id="section-infographic" class="app-section">
+            <div class="hero-text">
+                <h1>Visual Intelligence</h1>
+                <p>Gemini transforms your document into a professional, high-fidelity technical infographic.</p>
+            </div>
+            <div class="infographic-container">
+                <div id="infographic-canvas">
+                    <div class="initial-state">
+                        <p>Waiting for analysis...</p>
+                    </div>
+                </div>
+                <div class="infographic-controls">
+                    <button class="primary-btn">Download Image</button>
+                    <button class="secondary-btn">New Design</button>
+                </div>
+            </div>
+            <button class="next-btn" data-next="voice">Start Voice Chat ➔</button>
+        </section>
+
+        <!-- Section 4: Voice Interaction (Gemini Live) -->
+        <section id="section-voice" class="app-section">
+            <div class="voice-experience-container">
+                <div class="voice-visualizer-orb">
+                    <div class="orb-inner"></div>
+                    <div class="orb-waves">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="voice-controls-panel">
+                    <h1>Gemini Live</h1>
+                    <p class="voice-status">Ready to listen...</p>
+
+                    <button class="mic-main-btn" id="activate-mic">
+                        <div class="btn-content">
+                            <span class="mic-icon">🎙️</span>
+                            <span class="btn-text">Activate Voice Assistant</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="conversation-container">
+                    <div class="conversation-header">
+                        <h3>Conversation History</h3>
+                    </div>
+                    <div class="transcript-box" id="voice-transcript">
+                        <div class="empty-state">
+                            <p>Transcriptions will appear here during the conversation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
