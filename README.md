@@ -6,6 +6,30 @@ DocuMind transforms static PDF documents into dynamic, multimodal experiences—
 
 ---
 
+## 📸 Visual Showcase
+
+### 1. Modern Landing Page
+The application features a sleek, dark-themed interface with high-end glassmorphism effects and an intuitive drag-and-drop zone.
+![Landing Page](./screenshots/01_landing.png)
+
+### 2. Intelligent Document Processing
+Real-time feedback as Gemini analyzes the document, unlocking multimodal tools instantly.
+![Processing](./screenshots/02_upload_process.png)
+
+### 3. Executive Summary & Interactive Preview
+Side-by-side view of the PDF document and the AI-extracted technical insights.
+![Executive Summary](./screenshots/03_summary.png)
+
+### 4. Technical Visual Intelligence
+Gemini generates high-fidelity infographics based on the document's structure and concepts.
+![Infographic](./screenshots/04_infographic.png)
+
+### 5. Gemini Live Voice Experience
+Low-latency voice conversation with "Achird", allowing natural interaction with the document's content.
+![Gemini Live](./screenshots/05_voice.png)
+
+---
+
 ## 🎯 Main Objective
 
 The primary goal of this project is to demonstrate the power of **Vibe Coding** with **Antigravity**, building a professional, high-fidelity application with complex AI integrations (Text, Image, and Live Audio) through natural interaction and high-level architectural constraints.
