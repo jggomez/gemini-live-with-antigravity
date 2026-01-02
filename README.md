@@ -98,9 +98,11 @@ The primary goal of this project is to demonstrate the power of **Vibe Coding** 
 - **Stack**: HTML5, CSS3, and Vanilla JavaScript.
 - **Rationale**: Maximizes load speed and strictly adheres to portability requirements without framework overhead.
 
-### 3. Backend & Logic
+### 3. Backend & Logic: Firebase AI Logic
 - **Engine**: Firebase AI Logic.
-- **Rationale**: Centralizes security (API Keys), manages authentication, and serves as a robust bridge to the Gemini API.
+- **Capabilities**: Powering text generation (Executive Summaries), image generation (Technical Infographics), and low-latency audio via **Gemini Live**.
+- **Prompt Engineering**: Extensive use of **Firebase Prompt Templates** (e.g., `generatedocumentsummary-v100`) to decouple prompt management from core logic and ensure high-quality, versioned AI responses.
+- **Security**: Centralizes security (API Keys), manages authentication, and serves as a robust bridge to the Vertex AI API through Firebase.
 
 ### 4. Design Pattern: Layered Architecture
 - **UI Layer**: Handles DOM manipulation and user events.
@@ -121,8 +123,8 @@ The primary goal of this project is to demonstrate the power of **Vibe Coding** 
 
 * **Core**: [Vite](https://vitejs.dev/) + Vanilla JavaScript.
 * **Styling**: Modern CSS with **Glassmorphism**, vibrant gradients, and micro-animations.
-* **AI Engine**: [Google Gemini 2.x](https://deepmind.google/technologies/gemini/).
-* **Cloud Infrastructure**: [Firebase](https://firebase.google.com/) (Vertex AI, Storage, Hosting).
+* **AI Engine**: [Google Gemini 2.x](https://deepmind.google/technologies/gemini/) via **Firebase AI Logic**.
+* **Cloud Infrastructure**: [Firebase](https://firebase.google.com/) (Vertex AI, Storage, Hosting, **Prompt Templates**).
 
 ---
 
