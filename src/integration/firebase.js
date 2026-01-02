@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 import { getFunctions } from "firebase/functions";
 import { getStorage } from "firebase/storage";
 import { getAI, getGenerativeModel, getLiveGenerativeModel, getTemplateGenerativeModel, GoogleAIBackend, ResponseModality, startAudioConversation } from "firebase/ai";
@@ -15,6 +16,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize App Check with reCAPTCHA v3
+const appCheck = initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider('6LfLmT0sAAAAAFeHzVcji9xt4uI6u1o4-CQ5CjTG'),
+    isTokenAutoRefreshEnabled: true
+});
 
 // Initialize AI Service
 const ai = getAI(app, { backend: new GoogleAIBackend() });

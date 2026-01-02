@@ -102,9 +102,13 @@ The primary goal of this project is to demonstrate the power of **Vibe Coding** 
 - **Engine**: Firebase AI Logic.
 - **Capabilities**: Powering text generation (Executive Summaries), image generation (Technical Infographics), and low-latency audio via **Gemini Live**.
 - **Prompt Engineering**: Extensive use of **Firebase Prompt Templates** (e.g., `generatedocumentsummary-v100`) to decouple prompt management from core logic and ensure high-quality, versioned AI responses.
-- **Security**: Centralizes security (API Keys), manages authentication, and serves as a robust bridge to the Vertex AI API through Firebase.
+- **Security Logic**: Centralizes security (API Keys), manages authentication, and serves as a robust bridge to the Vertex AI API through Firebase.
 
-### 4. Design Pattern: Layered Architecture
+### 4. Security: Firebase App Check
+- **Implementation**: Firebase App Check with **reCAPTCHA v3**.
+- **Rationale**: Enhanced security by ensuring that only authorized web clients can access the application's Firebase resources, protecting against scrapers and malicious requests.
+
+### 5. Design Pattern: Layered Architecture
 - **UI Layer**: Handles DOM manipulation and user events.
 - **Logic Layer**: Orchestrates audio controllers, PDF processing, and visualization logic.
 - **Integration Layer**: Manages all communication with external services (Firebase/Gemini).
@@ -124,7 +128,7 @@ The primary goal of this project is to demonstrate the power of **Vibe Coding** 
 * **Core**: [Vite](https://vitejs.dev/) + Vanilla JavaScript.
 * **Styling**: Modern CSS with **Glassmorphism**, vibrant gradients, and micro-animations.
 * **AI Engine**: [Google Gemini 2.x](https://deepmind.google/technologies/gemini/) via **Firebase AI Logic**.
-* **Cloud Infrastructure**: [Firebase](https://firebase.google.com/) (Vertex AI, Storage, Hosting, **Prompt Templates**).
+* **Cloud Infrastructure**: [Firebase](https://firebase.google.com/) (Vertex AI, Storage, Hosting, **Prompt Templates**, **App Check**).
 
 ---
 
