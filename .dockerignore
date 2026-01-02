@@ -1,0 +1,8 @@
+node_modules
+dist
+.git
+.github
+screenshots
+.agent
+npm-debug.log*
+README.md
