@@ -140,6 +140,25 @@ The primary goal of this project is to demonstrate the power of **Vibe Coding** 
 
 ---
 
+## 🧪 Testing
+
+DocuMind includes a robust unit testing suite built with the **Node.js Native Test Runner** (v23+), avoiding external dependencies like Jest or Vitest.
+
+### Test Coverage
+- **Integration Layer**: Validation of Firebase initialization, App Check configuration, and AI model settings.
+- **Logic Layer**:
+  - **Storage**: Document upload flow and progress tracking.
+  - **Gemini**: Content generation (Summaries & Infographics) and multimodal data conversion.
+  - **Voice**: Gemini Live session management, transcription peeking, and error handling.
+
+### Running Tests
+To execute the full test suite:
+```bash
+npm test
+```
+
+---
+
 ## 📄 License
 
 This project was built during a Vibe Coding session. All rights reserved.
