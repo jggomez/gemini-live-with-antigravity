@@ -28,6 +28,10 @@ Gemini generates high-fidelity infographics based on the document's structure an
 Low-latency voice conversation with "Achird", allowing natural interaction with the document's content.
 ![Gemini Live](./screenshots/05_voice.png)
 
+### 6. Real-time Transcript
+The system provides instant transcriptions of both user and AI speech, maintaining a clear context of the conversation.
+![Voice Transcription](./screenshots/06_voice_transcription.png)
+
 ---
 
 ## 🎯 Main Objective
