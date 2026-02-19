@@ -17,6 +17,25 @@ global.self = global;
 global.window = global;
 global.location = { href: 'http://localhost' };
 
+// --- Load .env for Tests (No external dependencies) ---
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const envPath = path.resolve(__dirname, '../../.env');
+
+if (fs.existsSync(envPath)) {
+    const envConfig = fs.readFileSync(envPath, 'utf-8');
+    envConfig.split('\n').forEach(line => {
+        const [key, value] = line.split('=');
+        if (key && value) {
+            process.env[key.trim()] = value.trim();
+        }
+    });
+}
+
+
 // --- Firebase SDK Mocks ---
 
 const mockApp = { name: '[DEFAULT]' };

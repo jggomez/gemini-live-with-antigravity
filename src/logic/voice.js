@@ -7,10 +7,9 @@ let isConversationActive = false;
 /**
  * Starts a live voice conversation session with Gemini
  * @param {string} summary - The summary text
- * @param {Function} onTranscription - Callback for transcription updates
  * @returns {Promise<Object>} The conversation controller
  */
-export async function startVoiceSession(summary = "", onTranscription = null) {
+export async function startVoiceSession(summary = "") {
     try {
         if (isConversationActive) return controller;
 
@@ -19,26 +18,6 @@ export async function startVoiceSession(summary = "", onTranscription = null) {
 
         if (!session) throw new Error("Connection failed.");
         console.log("2. Session connected.");
-
-        // TAP INTO THE STREAM: 
-        // We override receive() to "peek" at the messages before they reach the audio engine.
-        const originalReceive = session.receive.bind(session);
-        session.receive = () => {
-            const stream = originalReceive();
-            return (async function* () {
-                for await (const message of stream) {
-                    if (message.type === 'serverContent') {
-                        if (message.inputTranscription) {
-                            if (onTranscription) onTranscription('user', message.inputTranscription.text);
-                        }
-                        if (message.outputTranscription) {
-                            if (onTranscription) onTranscription('model', message.outputTranscription.text);
-                        }
-                    }
-                    yield message;
-                }
-            })();
-        };
 
         console.log("3. Enabling audio hardware...");
         controller = await startAudioConversation(session);
@@ -62,6 +41,39 @@ export async function startVoiceSession(summary = "", onTranscription = null) {
         await stopVoiceSession();
         throw error;
     }
+}
+
+/**
+ * Attaches a listener for transcription events by overriding the session receive method.
+ * @param {Object} controllerObj - The conversation controller (not directly used here but kept for API consistency if needed later)
+ * @param {Function} onTranscription - Callback (type, text) => void
+ */
+export function attachTranscriptionListener(controllerObj, onTranscription) {
+    if (!session) {
+        console.warn("Cannot attach listener: No active session.");
+        return;
+    }
+
+    // TAP INTO THE STREAM: 
+    // We override receive() to "peek" at the messages before they reach the audio engine.
+    // Encapsulated here to avoid polluting the main start logic.
+    const originalReceive = session.receive.bind(session);
+    session.receive = () => {
+        const stream = originalReceive();
+        return (async function* () {
+            for await (const message of stream) {
+                if (message.type === 'serverContent') {
+                    if (message.inputTranscription) {
+                        if (onTranscription) onTranscription('user', message.inputTranscription.text);
+                    }
+                    if (message.outputTranscription) {
+                        if (onTranscription) onTranscription('model', message.outputTranscription.text);
+                    }
+                }
+                yield message;
+            }
+        })();
+    };
 }
 
 /**

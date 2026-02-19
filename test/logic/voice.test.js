@@ -36,7 +36,7 @@ mock.module('../../src/integration/firebase.js', {
 
 // --- Dynamic Import of logic/voice.js ---
 // We need to use a clean import or handle the singleton state if needed
-const { startVoiceSession, stopVoiceSession, isVoiceActive } = await import('../../src/logic/voice.js');
+const { startVoiceSession, stopVoiceSession, isVoiceActive, attachTranscriptionListener } = await import('../../src/logic/voice.js');
 
 // --- Tests ---
 
@@ -48,7 +48,10 @@ test('startVoiceSession - should establish connection and set active state', asy
     const onTranscription = mock.fn();
     const summary = "Test Context";
 
-    const controller = await startVoiceSession(summary, onTranscription);
+    const controller = await startVoiceSession(summary);
+
+    // Attach listener manually as per new API
+    attachTranscriptionListener(controller, onTranscription);
 
     assert.strictEqual(controller, mockController);
     assert.strictEqual(isVoiceActive(), true);
